@@ -62,7 +62,7 @@ public class Module implements Cloneable {
   private String id;
 
   /** the severity level. */
-  private Severity mSeverityLevel = Severity.inherit;
+  private Severity mSeverityLevel = Severity.INHERIT;
 
   /** the last severity level before setting to ignored. */
   private Severity mLastEnabledSeverity;
@@ -275,8 +275,8 @@ public class Module implements Cloneable {
       if (severityLevel.equals(defaultLevel)) {
         mSeverityLevel = null;
         setLastEnabledSeverity(null);
-      } else if (Severity.ignore.equals(severityLevel)) {
-        if (mSeverityLevel != null && !Severity.ignore.equals(mSeverityLevel)) {
+      } else if (Severity.IGNORE.equals(severityLevel)) {
+        if (mSeverityLevel != null && !Severity.IGNORE.equals(mSeverityLevel)) {
           setLastEnabledSeverity(mSeverityLevel);
         }
 

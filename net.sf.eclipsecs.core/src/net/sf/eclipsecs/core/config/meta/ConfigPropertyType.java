@@ -26,29 +26,29 @@ package net.sf.eclipsecs.core.config.meta;
 public enum ConfigPropertyType {
 
   /** A String. */
-  String,
+  STRING,
 
   /** An array of strings. */
-  StringArray,
+  STRING_ARRAY,
 
   /** An integer. */
-  Integer,
+  INTEGER,
 
   /** Select a single items from a list. */
-  SingleSelect,
+  SINGLE_SELECT,
 
   /** Boolean value. */
-  Boolean,
+  BOOLEAN,
 
   /** Select multiple items from a set. */
-  MultiCheck,
+  MULTI_CHECK,
 
   /** A value that is not configured. */
-  Hidden,
+  HIDDEN,
 
   /** A value that contains a file name. */
-  File,
+  FILE,
 
   /** A value that contains a regular expression. */
-  Regex
+  REGEX
 }

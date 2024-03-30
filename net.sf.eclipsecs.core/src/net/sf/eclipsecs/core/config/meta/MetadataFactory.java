@@ -211,21 +211,21 @@ public final class MetadataFactory {
       String validationType = modulePropertyDetails.getValidationType();
       if (validationType != null) {
         if (validationType.equals(TYPE_ID_PATTERN)) {
-          dataType = ConfigPropertyType.Regex;
+          dataType = ConfigPropertyType.REGEX;
         } else if (validationType.equals("tokenSet") || validationType.equals("tokenTypesSet")) {
-          dataType = ConfigPropertyType.MultiCheck;
+          dataType = ConfigPropertyType.MULTI_CHECK;
         }
       } else {
         dataType = sPropertyTypeMap.get(propertyType);
       }
     } else {
       if (propertyType.endsWith("Option")) {
-        dataType = ConfigPropertyType.SingleSelect;
+        dataType = ConfigPropertyType.SINGLE_SELECT;
       } else {
         if (propertyType.endsWith("[]")) {
-          dataType = ConfigPropertyType.StringArray;
+          dataType = ConfigPropertyType.STRING_ARRAY;
         } else {
-          dataType = ConfigPropertyType.String;
+          dataType = ConfigPropertyType.STRING;
         }
       }
     }
@@ -233,10 +233,10 @@ public final class MetadataFactory {
             modulePropertyDetails.getName(), modulePropertyDetails.getDefaultValue(), null);
     modifiedConfigPropertyMetadata.setDescription(modulePropertyDetails.getDescription());
 
-    if (dataType == ConfigPropertyType.SingleSelect) {
+    if (dataType == ConfigPropertyType.SINGLE_SELECT) {
       List<String> resultList = getEnumValues(propertyType);
       resultList.forEach(modifiedConfigPropertyMetadata.getPropertyEnumeration()::add);
-    } else if (dataType == ConfigPropertyType.MultiCheck) {
+    } else if (dataType == ConfigPropertyType.MULTI_CHECK) {
       String result = CheckUtil.getModifiableTokens(moduleDetails.getName());
       Collections.addAll(modifiedConfigPropertyMetadata.getPropertyEnumeration(), result.split(","));
     }
@@ -282,7 +282,7 @@ public final class MetadataFactory {
     for (int i = 0; i < size; i++) {
 
       ConfigProperty property = properties.get(i);
-      ConfigPropertyMetadata meta = new ConfigPropertyMetadata(ConfigPropertyType.String,
+      ConfigPropertyMetadata meta = new ConfigPropertyMetadata(ConfigPropertyType.STRING,
               property.getName(), null, null);
       property.setMetaData(meta);
     }
@@ -435,7 +435,7 @@ public final class MetadataFactory {
    * @return the default severity.
    */
   public static Severity getDefaultSeverity() {
-    return Severity.inherit;
+    return Severity.INHERIT;
   }
 
   /**
@@ -576,13 +576,13 @@ public final class MetadataFactory {
    * Create mapping between {@code ModulePropertyDetails} datatype and {@code ConfigPropertyType}.
    */
   private static void createPropertyTypeMapping() {
-    sPropertyTypeMap.put("java.lang.String", ConfigPropertyType.String);
-    sPropertyTypeMap.put("java.lang.String[]", ConfigPropertyType.StringArray);
-    sPropertyTypeMap.put("boolean", ConfigPropertyType.Boolean);
-    sPropertyTypeMap.put("int", ConfigPropertyType.Integer);
-    sPropertyTypeMap.put(TYPE_ID_PATTERN, ConfigPropertyType.Regex);
-    sPropertyTypeMap.put("java.util.regex.Pattern[]", ConfigPropertyType.StringArray);
-    sPropertyTypeMap.put("File", ConfigPropertyType.File);
+    sPropertyTypeMap.put("java.lang.String", ConfigPropertyType.STRING);
+    sPropertyTypeMap.put("java.lang.String[]", ConfigPropertyType.STRING_ARRAY);
+    sPropertyTypeMap.put("boolean", ConfigPropertyType.BOOLEAN);
+    sPropertyTypeMap.put("int", ConfigPropertyType.INTEGER);
+    sPropertyTypeMap.put(TYPE_ID_PATTERN, ConfigPropertyType.REGEX);
+    sPropertyTypeMap.put("java.util.regex.Pattern[]", ConfigPropertyType.STRING_ARRAY);
+    sPropertyTypeMap.put("File", ConfigPropertyType.FILE);
   }
 
   /**
